@@ -1,22 +1,9 @@
 import type { Metadata } from "next";
-import { Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-  weight: ["400", "500", "600"],
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  weight: ["500", "600", "700"],
-});
-
 export const metadata: Metadata = {
-  title: "AETHER_OS // Developer Portfolio",
-  description: "Specializing in high-performance digital interfaces where luxury aesthetics meet technical precision.",
+  title: "Portfolio",
+  description: "My Portfolio Website",
 };
 
 export default function RootLayout({
@@ -25,16 +12,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block"
-        />
-      </head>
-      <body
-        className={`${manrope.variable} ${spaceGrotesk.variable} antialiased`}
-      >
+    <html lang="en">
+      <body className="bg-[#05040B] text-white overflow-x-hidden">
+        
+        {/* Global Background */}
+        <div className="fixed inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-950 via-[#0A061F] to-black" />
+
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#7e22ce_0%,transparent_45%)] opacity-30" />
+
+          <div className="absolute top-10 left-10 w-72 h-72 bg-purple-600/30 rounded-full blur-[120px]" />
+
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-pink-500/20 rounded-full blur-[140px]" />
+        </div>
+
         {children}
       </body>
     </html>

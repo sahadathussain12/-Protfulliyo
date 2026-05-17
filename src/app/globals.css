@@ -120,3 +120,6 @@ body {
 @utility shadow-glow-blue {
   box-shadow: 0 0 30px rgba(0, 166, 224, 0.15);
 }
+html {
+  scroll-behavior: smooth;
+}

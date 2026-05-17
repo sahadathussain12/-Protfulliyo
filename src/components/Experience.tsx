@@ -1,46 +1,109 @@
-import React from 'react';
+"use client";
 
-const Experience = () => {
-  const experiences = [
-    {
-      role: "Lead Frontend Architect",
-      company: "NEURAL_DYNAMICS INC.",
-      period: "2022 — PRESENT",
-      description: "Pioneering next-generation user interfaces for AI-driven logistics. Managed a team of 12 developers, reducing interface latency by 45% through custom WebGL optimizations.",
-      color: "primary"
-    },
-    {
-      role: "Senior Product Engineer",
-      company: "VOID_SYSTEMS",
-      period: "2019 — 2022",
-      description: "Developed the core UI framework for a luxury fintech ecosystem. Implemented complex data visualization layers using D3.js and Three.js for global transactions.",
-      color: "secondary"
-    }
-  ];
+import { motion } from "framer-motion";
+import { FiBriefcase } from "react-icons/fi";
 
+const experiences = [
+  {
+    role: "Frontend Engineer",
+    company: "Neural Dynamics Inc.",
+    period: "2026 — Present",
+    description:
+      "Building scalable UI systems and high-performance web applications with modern React architecture.",
+    tech: ["Next.js", "React", "Tailwind"],
+  },
+  {
+    role: "UI Developer",
+    company: "Void Systems",
+ 
+    description:
+      "Designed interactive dashboards and improved user experience for fintech and SaaS platforms.",
+    tech: ["React", "Framer Motion", "D3.js"],
+  },
+];
+
+export default function Experience() {
   return (
-    <section className="py-gap-xl px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto relative" id="experience">
-      <h2 className="font-display-lg text-headline-xl mb-gap-xl">System History</h2>
-      <div className="absolute left-margin-mobile md:left-margin-desktop top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-primary/50 to-transparent ml-4"></div>
-      <div className="space-y-gap-md relative">
-        {experiences.map((exp, index) => (
-          <div key={index} className="ml-12 relative group">
-            <div className={`absolute -left-[37px] top-6 w-4 h-4 rounded-full bg-${exp.color} glow-${exp.color === 'primary' ? 'purple' : 'blue'} border-4 border-background z-10 group-hover:scale-125 transition-transform`}></div>
-            <div className={`glass-panel p-8 rounded-3xl border-white/5 group-hover:border-${exp.color}/30 transition-all`}>
-              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4 gap-2">
-                <h3 className={`text-headline-lg font-display-lg text-${exp.color}`}>{exp.role}</h3>
-                <span className="text-label-sm font-label-sm text-on-surface-variant bg-surface-container px-4 py-1 rounded-full border border-white/5">{exp.period}</span>
+    <section id="experience" className="relative py-28 px-6 max-w-5xl mx-auto text-white">
+      {/* Glow background */}
+      <div className="absolute inset-0 flex justify-center">
+        <div className="w-[500px] h-[500px] bg-purple-500/10 blur-[140px] rounded-full" />
+      </div>
+
+      {/* Heading */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-20 relative"
+      >
+        <p className="text-purple-400 tracking-[6px] text-xs uppercase">
+          Career Path
+        </p>
+        <h2 className="text-4xl md:text-6xl font-bold mt-4">
+          Experience Timeline
+        </h2>
+      </motion.div>
+
+      {/* Timeline line */}
+      <div className="absolute left-1/2 top-40 bottom-10 w-[2px] bg-white/10 hidden md:block" />
+
+      {/* Items */}
+      <div className="space-y-20 relative">
+        {experiences.map((exp, index) => {
+          const isLeft = index % 2 === 0;
+
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className={`relative md:w-1/2 ${
+                isLeft ? "md:ml-0" : "md:ml-auto"
+              }`}
+            >
+              {/* Dot */}
+              <div className="absolute top-6 left-1/2 md:left-auto md:-translate-x-0 -translate-x-1/2 md:right-[-10px] w-4 h-4 rounded-full bg-purple-500 shadow-lg shadow-purple-500/30" />
+
+              {/* Card */}
+              <div className="p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-purple-500/40 transition-all hover:scale-[1.02]">
+                
+                {/* Header */}
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-white">
+                      {exp.role}
+                    </h3>
+                    <p className="text-sm text-gray-400">{exp.company}</p>
+                  </div>
+
+                  <span className="text-xs px-3 py-1 rounded-full bg-white/10 border border-white/10">
+                    {exp.period}
+                  </span>
+                </div>
+
+                {/* Description */}
+                <p className="text-gray-400 text-sm leading-relaxed mb-5">
+                  {exp.description}
+                </p>
+
+                {/* Tech tags */}
+                <div className="flex flex-wrap gap-2">
+                  {exp.tech.map((t, i) => (
+                    <span
+                      key={i}
+                      className="text-[10px] uppercase tracking-widest px-3 py-1 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <h4 className="text-body-lg font-bold mb-4">{exp.company}</h4>
-              <p className="text-on-surface-variant leading-relaxed">
-                {exp.description}
-              </p>
-            </div>
-          </div>
-        ))}
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );
-};
-
-export default Experience;
+}

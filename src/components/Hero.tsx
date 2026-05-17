@@ -1,180 +1,236 @@
 "use client";
 
 import Image from "next/image";
+import my from "../../public/my.png";
 import { motion } from "framer-motion";
-import { ArrowRight, Download, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  Download,
+  Sparkles,
+  MousePointer2,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Hero = () => {
-  const fullName = "Sahadat Hussain";
-  const [text, setText] = useState("");
-  const [index, setIndex] = useState(0);
+  const roles = [
+    "Frontend Developer",
+    "UI/UX Designer",
+    "React Specialist",
+    "Next.js Developer",
+  ];
+
+  const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 2500);
 
-    if (index < fullName.length) {
-      timeout = setTimeout(() => {
-        setText((prev) => prev + fullName[index]);
-        setIndex((prev) => prev + 1);
-      }, 90);
-    } else {
-      timeout = setTimeout(() => {
-        setText("");
-        setIndex(0);
-      }, 2500);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [index, fullName]);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#05040B] flex items-center justify-center">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-950 via-[#0A061F] to-black" />
-
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#7e22ce_0%,transparent_45%)] opacity-30" />
-
-      {/* Glow */}
-      <div className="absolute top-10 left-10 w-72 h-72 bg-purple-600/30 rounded-full blur-[120px]" />
-
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-pink-500/20 rounded-full blur-[140px]" />
+    <section
+      id="home"
+      className="relative min-h-screen overflow-hidden bg-transparent flex items-center"
+    >
+      {/* ব্যাকগ্রাউন্ডের সব কালার, গ্রিড এবং গ্লো ইফেক্ট কেটে দেওয়া হয়েছে */}
 
       {/* Main Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-16 items-center">
         
-        {/* Left Side */}
+        {/* LEFT SIDE */}
         <motion.div
-          initial={{ opacity: 0, x: -60 }}
+          initial={{ opacity: 0, x: -80 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1 }}
           className="space-y-8"
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-md">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/20 bg-white/5 backdrop-blur-xl"
+          >
             <Sparkles className="w-4 h-4 text-purple-300" />
-            <span className="text-sm text-purple-200 font-medium">
-              Creative Developer
+            <span className="text-sm text-purple-200">
+              Premium Developer Portfolio
             </span>
-          </div>
+          </motion.div>
 
           {/* Heading */}
-          <h1 className="text-5xl md:text-7xl lg:text-[82px] font-black leading-[0.95] tracking-[-3px] text-white">
-            Hey <br />
+          <div className="space-y-5">
+            <motion.h2
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-gray-400 text-xl md:text-2xl"
+            >
+              Hello, I&apos;m
+            </motion.h2>
 
-            <span className="text-white">I&apos;m </span>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="text-5xl md:text-7xl lg:text-[90px] font-black leading-[0.9]"
+            >
+              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                SAHADAT
+              </span>
+              <br />
+              <span className="text-white">
+                HUSSAIN
+              </span>
+            </motion.h1>
 
-            <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
-              {text}
-              <span className="animate-pulse text-white">|</span>
-            </span>
-          </h1>
+            {/* Animated Role */}
+            <motion.div
+              key={roleIndex}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.6,
+                ease: "easeInOut",
+              }}
+              className="h-[40px]"
+            >
+              <p className="text-2xl md:text-3xl font-semibold text-purple-300">
+                {roles[roleIndex]}
+              </p>
+            </motion.div>
+          </div>
 
           {/* Description */}
-          <p className="max-w-xl text-lg md:text-xl text-gray-300 leading-relaxed">
-            I create premium modern websites with smooth animations,
-            interactive UI, and powerful user experiences.
-          </p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="max-w-xl text-lg md:text-xl text-gray-300 leading-relaxed"
+          >
+            I build premium modern websites with smooth animations,
+            interactive experiences, and visually stunning user
+            interfaces using React, Next.js, Tailwind CSS,
+            and modern frontend technologies.
+          </motion.p>
 
           {/* Buttons */}
-          <div className="flex flex-wrap gap-5 pt-2">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1 }}
+            className="flex flex-wrap gap-5 pt-2"
+          >
+            {/* Projects */}
+            <motion.a
+              href="#projects"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0px 0px 30px rgba(168,85,247,0.5)",
+              }}
               whileTap={{ scale: 0.95 }}
-              className="group px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold flex items-center gap-3 shadow-lg shadow-purple-500/30"
+              className="group px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold flex items-center gap-3 cursor-pointer"
             >
-              See My Work
-
+              See Projects
               <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
-            </motion.button>
+            </motion.a>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
+            {/* Download CV */}
+            <motion.a
+              href="/cv.pdf"
+              download="Sahadat_Hussain_CV.pdf"
+              whileHover={{
+                scale: 1.05,
+              }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-2xl border border-white/20 bg-white/5 backdrop-blur-md hover:bg-white/10 transition-all text-white font-semibold flex items-center gap-3"
+              className="px-8 py-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl text-white font-semibold flex items-center gap-3 cursor-pointer hover:bg-white/10 transition-all"
             >
               Download CV
-              <Download />
-            </motion.button>
-          </div>
+              <Download size={18} />
+            </motion.a>
+          </motion.div>
         </motion.div>
 
-        {/* Right Side */}
+        {/* RIGHT SIDE */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
+          initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="relative flex justify-center lg:justify-end"
+          className="relative flex justify-center"
         >
-          <div className="relative">
+          {/* Rotating Circle */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="absolute w-[430px] h-[430px] rounded-full border border-purple-500/20 border-dashed"
+          />
 
-            {/* Glow Border */}
-            <div className="absolute -inset-5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-[40px] blur-2xl opacity-30 animate-pulse" />
+          {/* Image Container */}
+          <motion.div
+            whileHover={{
+              scale: 1.04,
+              rotate: 1,
+            }}
+            animate={{
+              y: [0, -15, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="relative w-[320px] h-[320px] md:w-[430px] md:h-[430px] rounded-full overflow-hidden border border-white/10 bg-white/5 backdrop-blur-2xl shadow-[0_0_80px_rgba(168,85,247,0.35)]"
+          >
+            <Image
+              src={my}
+              alt="Sahadat Hussain"
+              fill
+              priority
+              className="object-cover scale-110 hover:scale-125 transition-transform duration-700"
+            />
+          </motion.div>
 
-            {/* Image Card */}
-            <div className="relative w-[340px] md:w-[420px] overflow-hidden rounded-[36px] border border-white/10 bg-white/5 backdrop-blur-md shadow-2xl">
-              
-              <Image
-                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop"
-                alt="Sahadat Hussain"
-                width={600}
-                height={750}
-                priority
-                className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-
-              {/* Bottom Info */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 flex items-center justify-between bg-black/40 backdrop-blur-xl">
-                
-                <div>
-                  <p className="text-white font-semibold text-lg">
-                    Sahadat Hussain
-                  </p>
-
-                  <p className="text-sm text-purple-300">
-                    Frontend Developer
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-emerald-400 text-sm font-medium">
-                    ● Available
-                  </p>
-                </div>
-              </div>
+          {/* Floating Card 1 */}
+          <motion.div
+            animate={{
+              y: [0, -12, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute top-10 -left-5 px-5 py-3 rounded-2xl border border-purple-500/20 bg-zinc-900/80 backdrop-blur-xl shadow-xl"
+          >
+            <div className="flex items-center gap-2">
+              <MousePointer2 className="text-purple-300 w-4 h-4" />
+              <p className="text-purple-200 text-sm">
+                Smooth Animation
+              </p>
             </div>
+          </motion.div>
 
-            {/* Floating Card 1 */}
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-              }}
-              className="absolute -top-6 -left-6 px-5 py-3 rounded-2xl border border-purple-500/20 bg-zinc-900/80 backdrop-blur-xl shadow-xl"
-            >
-              <p className="text-purple-300 font-medium">
-                React / Next.js
-              </p>
-            </motion.div>
-
-            {/* Floating Card 2 */}
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-              }}
-              className="absolute -bottom-5 -right-6 px-5 py-3 rounded-2xl border border-pink-500/20 bg-zinc-900/80 backdrop-blur-xl shadow-xl"
-            >
-              <p className="text-pink-300 font-medium">
-                UI/UX Design
-              </p>
-            </motion.div>
-          </div>
+          {/* Floating Card 2 */}
+          <motion.div
+            animate={{
+              y: [0, 12, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute bottom-8 -right-6 px-5 py-3 rounded-2xl border border-cyan-500/20 bg-zinc-900/80 backdrop-blur-xl shadow-xl"
+          >
+            <p className="text-cyan-300 text-sm">
+              Next.js Developer
+            </p>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -57,7 +57,7 @@ const skills = [
 
 const Skills = () => {
   return (
-    <section className="relative py-28 overflow-hidden">
+    <section  id="skills" className="relative py-28 overflow-hidden">
       
       {/* Section Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-purple-600/20 blur-[140px] rounded-full" />

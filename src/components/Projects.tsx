@@ -1,5 +1,8 @@
 "use client";
 import Images from '../../public/image.png'
+import bpl from '../../public/bpl.png'
+import ai from '../../public/aii.png'
+import book from '../../public/book.png'
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi"; 
@@ -10,33 +13,33 @@ const projects = [
     title: "dagitools-Platfrom",
     description: "Modern real estate platform with premium UI and smooth animations.",
     image: Images,
-    live: "#",
-    repo: "#",
+    live: "https://digitools-platfrom-a.netlify.app",
+    repo: "https://github.com/sahadathussain12/DigiTools-Platform",
     tech: ["React", "Tailwind"],
   },
   {
-    title: "Crypto Dashboard",
-    description: "Interactive analytics dashboard with real-time charts.",
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=1400&auto=format&fit=crop",
-    live: "digitools-platfrom-a.netlify.app",
-    repo: "#",
+    title: "book vibe",
+    description: "A modern book discovery platform where users can explore, search, and save their favorite books with a clean and responsive UI.",
+    image: book,
+    live: "https://book-vibe-project-1.netlify.app",
+    repo: "https://github.com/sahadathussain12/book-vibe",
     tech: ["React", "Chart.js"],
   },
   {
-    title: "Portfolio Website",
-    description: "Creative developer portfolio with modern dark aesthetic.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&auto=format&fit=crop",
-    live: "#",
-    repo: "#",
-    tech: ["Next.js", "Framer"],
+    title: "Ai-Modele",
+    description: "Creative developer Ai model  aesthetic.",
+    image: ai,
+    live: "https://peppy-bonbon-1fa566.netlify.app",
+    repo: "https://github.com/sahadathussain12/Ai-Model",
+    tech: ["React", "tailwind"],
   },
   {
-    title: "E-Commerce App",
+    title: "bpl-dream-11",
     description: "Full-stack shopping platform with secure checkout.",
-    image: "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1400&auto=format&fit=crop",
-    live: "#",
-    repo: "#",
-    tech: ["Next.js", "Stripe"],
+    image: bpl,
+    live: "https://bpl-11-dream-1.netlify.app",
+    repo: "https://github.com/sahadathussain12/bpl-dream-11",
+    tech: ["React", "Stripe"],
   },
   {
     title: "AI Chat Tool",

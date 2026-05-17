@@ -54,7 +54,8 @@ const About = () => {
   );
 
   return (
-    <section
+    <section 
+      id="about"
       ref={sectionRef}
       className="relative py-32 overflow-hidden"
     >

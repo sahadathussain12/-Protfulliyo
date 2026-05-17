@@ -16,7 +16,7 @@ export default function Contact() {
     try {
       await emailjs.sendForm(
         "service_q8hg0bz",
-        "template_op9b9ng",
+        "template_55vauel", // 👈 নতুন টেমপ্লেট আইডি এখানে আপডেট করা হয়েছে
         formRef.current!,
         "ppwJNWL0h3gBLoPi-"
       );
@@ -36,7 +36,7 @@ export default function Contact() {
       id="contact"
       className="py-24 px-6 relative overflow-hidden"
     >
-      {/* BACKGROUND GLOW (kept but clean) */}
+      {/* BACKGROUND GLOW */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute w-[350px] h-[350px] bg-cyan-500/10 blur-[120px] top-10 left-10 rounded-full" />
         <div className="absolute w-[300px] h-[300px] bg-pink-500/10 blur-[120px] bottom-10 right-10 rounded-full" />

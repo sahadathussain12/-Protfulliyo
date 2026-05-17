@@ -34,101 +34,92 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-section-gap px-margin-mobile md:px-gutter relative overflow-hidden"
+      className="py-24 px-6 relative overflow-hidden"
     >
-      {/* glow background */}
-      <div className="absolute inset-0">
-        <div className="absolute w-[400px] h-[400px] bg-[#00F5FF]/10 blur-[120px] top-10 left-10 rounded-full" />
-        <div className="absolute w-[300px] h-[300px] bg-[#FF00FF]/10 blur-[120px] bottom-10 right-10 rounded-full" />
+      {/* BACKGROUND GLOW (kept but clean) */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute w-[350px] h-[350px] bg-cyan-500/10 blur-[120px] top-10 left-10 rounded-full" />
+        <div className="absolute w-[300px] h-[300px] bg-pink-500/10 blur-[120px] bottom-10 right-10 rounded-full" />
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 60, scale: 0.95 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.9 }}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="max-w-container-max mx-auto glass-card p-1 md:p-12 rounded-[3rem] overflow-hidden relative z-10"
+        className="max-w-6xl mx-auto bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-xl"
       >
-        <div className="bg-surface rounded-[2.8rem] p-8 md:p-16 flex flex-col md:flex-row gap-12">
+        <div className="grid md:grid-cols-2 gap-10">
 
-          {/* LEFT */}
-          <div className="md:w-1/2">
-            <h2 className="text-[40px] font-bold text-white mb-6">
-              LET’S_CONNECT
+          {/* LEFT SIDE */}
+          <div className="space-y-6">
+
+            <h2 className="text-4xl font-bold text-white">
+              Let’s Connect
             </h2>
 
-            <p className="text-[18px] text-on-surface-variant mb-10">
-              Frontend Developer | React | Next.js | Node.js
+            <p className="text-gray-400">
+              Frontend Developer | React | Next.js | UI Designer
             </p>
 
-            <div className="space-y-4 text-sm">
-              {/* email */}
-
-              <div className="flex items-center gap-3 text-[#00F5FF] group">
-                <FaEnvelope className="text-xl transition-transform duration-300 group-hover:scale-125 group-hover:rotate-12" />
-                <span className="text-base break-all">
-                 sahadathussain872856@gmail.comnp
-                </span>
-              </div>
-
-              {/* location  */}
-              <div className="flex items-center gap-3 text-[#FF00FF] group">
-                <FaMapMarkerAlt className="text-xl transition-transform duration-300 group-hover:scale-125 group-hover:-translate-y-1" />
-                <span className="text-base">
-                  Rangpur, Bangladesh
-                </span>
-              </div>
-
-              {/* phone number */}
-              <div className="flex items-center gap-3 text-[#FF8A00] group">
-                <FaPhoneAlt className="text-xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-12" />
-
-                <span className="text-base font-semibold tracking-wide">
-                  +880 1328654064
-                </span>
-              </div>
-
+            {/* EMAIL */}
+            <div className="flex items-center gap-3 text-cyan-400">
+              <FaEnvelope />
+              <span className="break-all">
+                sahadathussain872856@gmail.com
+              </span>
             </div>
+
+            {/* LOCATION */}
+            <div className="flex items-center gap-3 text-pink-400">
+              <FaMapMarkerAlt />
+              <span>Rangpur, Bangladesh</span>
+            </div>
+
+            {/* PHONE */}
+            <div className="flex items-center gap-3 text-orange-400">
+              <FaPhoneAlt />
+              <span>+880 1328654064</span>
+            </div>
+
           </div>
 
           {/* RIGHT FORM */}
-          <div className="md:w-1/2">
-            <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
+          <form ref={formRef} onSubmit={sendEmail} className="space-y-5">
 
-              <input
-                name="name"
-                type="text"
-                placeholder="YOUR NAME"
-                required
-                className="w-full bg-surface-container border border-white/10 rounded-xl px-6 py-4 outline-none focus:border-[#00F5FF]"
-              />
+            <input
+              name="name"
+              type="text"
+              placeholder="Your Name"
+              required
+              className="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/10 text-white outline-none focus:border-cyan-400"
+            />
 
-              <input
-                name="email"
-                type="email"
-                placeholder="EMAIL ADDRESS"
-                required
-                className="w-full bg-surface-container border border-white/10 rounded-xl px-6 py-4 outline-none focus:border-[#FF00FF]"
-              />
+            <input
+              name="email"
+              type="email"
+              placeholder="Your Email"
+              required
+              className="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/10 text-white outline-none focus:border-pink-400"
+            />
 
-              <textarea
-                name="message"
-                placeholder="YOUR MESSAGE"
-                rows={4}
-                required
-                className="w-full bg-surface-container border border-white/10 rounded-xl px-6 py-4 outline-none focus:border-[#FF8A00]"
-              />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              rows={5}
+              required
+              className="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/10 text-white outline-none focus:border-orange-400"
+            />
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full cyber-acid-gradient text-white font-bold py-4 rounded-xl uppercase tracking-widest"
-              >
-                {loading ? "SENDING..." : "TRANSMIT MESSAGE"}
-              </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-pink-500 text-white font-semibold hover:scale-105 transition"
+            >
+              {loading ? "Sending..." : "Send Message"}
+            </button>
 
-            </form>
-          </div>
+          </form>
 
         </div>
       </motion.div>

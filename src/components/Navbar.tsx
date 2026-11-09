@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -78,7 +77,12 @@ const Navbar = () => {
       }
     );
 
-    sections.forEach((section) => observer.observe(section));
+    // Fixed TypeScript null check error here
+    sections.forEach((section) => {
+      if (section) {
+        observer.observe(section);
+      }
+    });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -87,7 +91,7 @@ const Navbar = () => {
   }, []);
 
   // NAVIGATION CLICK
-  const handleNavClick = (link) => {
+  const handleNavClick = (link: string) => {
     setActiveItem(link);
     setIsMenuOpen(false);
   };

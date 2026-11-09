@@ -1,12 +1,18 @@
 "use client";
-import Images from '../../public/image.png'
-import bpl from '../../public/bpl.png'
-import ai from '../../public/aii.png'
-import book from '../../public/book.png'
+
+import Images from "../../public/image.png";
+import bpl from "../../public/bpl.png";
+import ai from "../../public/aii.png";
+import book from "../../public/book.png";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { FiArrowUpRight } from "react-icons/fi"; 
-import { FaGithub } from "react-icons/fa"; 
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+} from "framer-motion";
+import { MouseEvent } from "react";
+import { FiArrowUpRight } from "react-icons/fi";
+import { FaGithub } from "react-icons/fa";
 
 const projects = [
   {
@@ -27,11 +33,11 @@ const projects = [
   },
   {
     title: "Ai-Modele",
-    description: "Creative developer Ai model  aesthetic.",
+    description: "Creative developer Ai model aesthetic.",
     image: ai,
     live: "https://peppy-bonbon-1fa566.netlify.app",
     repo: "https://github.com/sahadathussain12/Ai-Model",
-    tech: ["React", "tailwind"],
+    tech: ["React", "Tailwind"],
   },
   {
     title: "bpl-dream-11",
@@ -61,9 +67,10 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="relative py-32 overflow-hidden">
-      {/* Background Glow - Agertai Rakha Hoyeche */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-purple-600/10 blur-[160px] rounded-full" />
+    <section id="projects" className="relative py-32 overflow-hidden bg-background text-on-background">
+      
+      {/* Background Ambient Glow */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-purple-600/15 blur-[160px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -75,78 +82,129 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <p className="text-purple-400 font-semibold tracking-[4px] uppercase mb-4 text-sm">
+          <p className="text-primary font-semibold tracking-[4px] uppercase mb-4 text-sm">
             MY PROJECTS
           </p>
-          <h2 className="text-5xl md:text-7xl font-black text-white">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-on-background">
             Featured Work
           </h2>
         </motion.div>
 
-        {/* Grid Layout (3 Columns on Large Screens) */}
+        {/* Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative flex flex-col rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden hover:border-purple-500/50 transition-colors"
-            >
-              {/* Image Area */}
-              <div className="relative h-[240px] overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              </div>
-
-              {/* Content Area */}
-              <div className="p-8 flex flex-col flex-grow">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((t, i) => (
-                    <span key={i} className="text-[10px] uppercase tracking-widest text-purple-400 font-bold">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                
-                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
-                  {project.title}
-                </h3>
-                
-                <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">
-                  {project.description}
-                </p>
-
-                {/* Buttons */}
-                <div className="flex items-center gap-4">
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white text-black font-bold text-sm hover:bg-purple-600 hover:text-white transition-all"
-                  >
-                    Live <FiArrowUpRight />
-                  </a>
-                  <a
-                    href={project.repo}
-                    target="_blank"
-                    className="inline-flex items-center justify-center w-12 h-12 rounded-xl border border-white/10 bg-white/5 text-white hover:bg-white/10 transition-all"
-                  >
-                    <FaGithub size={20} />
-                  </a>
-                </div>
-              </div>
-            </motion.div>
+            <ProjectCard key={index} project={project} index={index} />
           ))}
         </div>
       </div>
     </section>
   );
 };
+
+{/* Individual Project Card with Interactive Spotlight */}
+function ProjectCard({
+  project,
+  index,
+}: {
+  project: typeof projects[0];
+  index: number;
+}) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -8, scale: 1.01 }}
+      onMouseMove={handleMouseMove}
+      className="group relative flex flex-col rounded-[32px] border border-outline-variant bg-surface/80 backdrop-blur-xl overflow-hidden shadow-xl transition-colors duration-300 hover:border-primary/50"
+    >
+      {/* Mouse Follower Glow Spotlight Layer */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-[32px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              350px circle at ${mouseX}px ${mouseY}px,
+              rgba(139, 92, 246, 0.15),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+
+      {/* Image Area */}
+      <div className="relative h-[240px] w-full overflow-hidden">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover group-hover:scale-110 transition-transform duration-700"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90" />
+      </div>
+
+      {/* Content Area */}
+      <div className="p-8 flex flex-col flex-grow relative z-10">
+        {/* Tech Badges */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.tech.map((t, i) => (
+            <span
+              key={i}
+              className="text-[11px] uppercase tracking-wider text-primary font-bold px-2.5 py-1 rounded-md bg-primary/10 border border-primary/20"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+
+        {/* Title */}
+        <h3 className="text-2xl font-bold text-on-background mb-3 group-hover:text-primary transition-colors duration-300">
+          {project.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-on-surface-variant text-sm leading-relaxed mb-8 flex-grow">
+          {project.description}
+        </p>
+
+        {/* Buttons */}
+        <div className="flex items-center gap-4 pt-2">
+          <motion.a
+            href={project.live}
+            target="_blank"
+            rel="noreferrer"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary hover:bg-primary-container text-white font-semibold text-sm shadow-[0_0_20px_rgba(139,92,246,0.2)] transition duration-300"
+          >
+            Live Demo <FiArrowUpRight size={18} />
+          </motion.a>
+
+          <motion.a
+            href={project.repo}
+            target="_blank"
+            rel="noreferrer"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center justify-center w-12 h-12 rounded-xl border border-outline-variant bg-surface text-on-background hover:text-primary hover:border-primary/40 transition duration-300"
+            aria-label="GitHub Repository"
+          >
+            <FaGithub size={20} />
+          </motion.a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default Projects;

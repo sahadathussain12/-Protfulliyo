@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import CursorAura from "@/components/CursorAura";
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -27,6 +28,7 @@ export default function RootLayout({
         </div>
 
         {children}
+        <CursorAura />
       </body>
     </html>
   );
